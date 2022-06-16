@@ -15,10 +15,26 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                
+                    text: "Hello Vue"
                 };
             },
-            template: ``
+            methods: {
+                input(e){
+                    this.text = e.srcElement.value;
+                }
+            },
+            template: `
+                <p>{{ text }}</p>
+                <!-- alias for v-on and v-bind -->
+                <input 
+                    type="text"
+                    @input="input"
+                    :value="text">
+                <!-- alias -->
+                <input 
+                    type="text" 
+                    v-model="text">
+            `
         }).mount("#app");
     </script>
 </body>

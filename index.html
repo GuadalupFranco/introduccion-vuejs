@@ -15,15 +15,28 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "Hello Vue"
+                    text: "I'm a door",
+                    open: false
                 };
             },
-            watch: {
-                text(value, old){
-                    console.log("watcher!",value, old, this.text)
+            computed: {
+                label(){
+                    return this.open ? "Close" : "Open";
                 }
             },
-            template: `{{ text }}`
+            watch: {
+                open(value){
+                    if(value) {
+                        this.text = "Door opened";
+                    } else {
+                        this.text = "Door closed";
+                    }
+                }
+            },
+            template: `
+            <div>{{ text }}</div>
+            <button @click="open = !open">{{ label }}</button>
+            `
         }).mount("#app");
     </script>
 </body>

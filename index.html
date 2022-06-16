@@ -15,10 +15,15 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                
+                    text: "Hello Vue"
                 };
             },
-            template: ``
+            watch: {
+                text(value, old){
+                    console.log("watcher!",value, old, this.text)
+                }
+            },
+            template: `{{ text }}`
         }).mount("#app");
     </script>
 </body>

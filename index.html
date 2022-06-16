@@ -15,7 +15,8 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "Door closed",
+                    username: "",
+                    text: "You are looged out",
                     open: false,
                 };
             },
@@ -30,17 +31,29 @@
             watch: {
                 open(value){
                     if(value) {
-                        this.text = "Door opened";
+                        this.text = "VUE JS";
 
                     } else {
-                        this.text = "Door closed";
+                        this.text = "Access to your account";
+                        this.username = "";
                     }
                 }
             },
             template: `
             <div class="container" :class="styles">
                 <h2>{{ text }}</h2>
-                <button @click="open = !open">{{ label }}</button>
+
+                <div v-if="open">
+                    <p> Hello, {{ username }}</p>
+                </div>
+                <div v-else="open">
+                    <label>Username: </label>
+                    <input type="text" v-model="username">
+                </div>
+                <button @click="open = !open">
+                    <div v-if="!open">Log in</div>    
+                    <div v-else="open">Log out</div>
+                </button>
             </div>
             `
         }).mount("#app");

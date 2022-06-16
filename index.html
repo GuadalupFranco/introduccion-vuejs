@@ -15,30 +15,68 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "I'm a door",
-                    open: false
+                    text: "Door closed",
+                    open: false,
                 };
             },
             computed: {
                 label(){
                     return this.open ? "Close" : "Open";
+                },
+                styles(){
+                    return this.open ? ['open'] : ['close'];
                 }
             },
             watch: {
                 open(value){
                     if(value) {
                         this.text = "Door opened";
+
                     } else {
                         this.text = "Door closed";
                     }
                 }
             },
             template: `
-            <div>{{ text }}</div>
-            <button @click="open = !open">{{ label }}</button>
+            <div class="container" :class="styles">
+                <h2>{{ text }}</h2>
+                <button @click="open = !open">{{ label }}</button>
+            </div>
             `
         }).mount("#app");
     </script>
+
+    <style>
+        html, body {
+            height: 100vh;
+            margin: 0;
+            font-family: Nunito, Arial, sans-serif;
+        }
+        #app, .container {
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        button {
+            margin-top: 24px;
+            border: none;
+            background-color: white;
+            padding: 8px 24px;
+            border-radius: 12px;
+        }
+
+        .close {
+            background-color: #eca1a6;
+        }
+
+        .open {
+            background-color: #b5e7a0;
+        }
+    </style>
 </body>
 
 </html>

@@ -28,8 +28,8 @@
             <ul>
                 <v-item 
                     v-for="(item, i) in items" 
-                    v-bind:text="item"
-                    v-on:remove="deleteElement(i)"
+                    :text="item"
+                    @remove="deleteElement(i)"
                 />
             </ul>
             `
@@ -45,7 +45,7 @@
                 }
             },
             template: `
-            <li :click="rm">{{ text }}</li>
+            <li @click="rm">{{ text }}</li>
             `
         });
 

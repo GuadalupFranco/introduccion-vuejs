@@ -12,14 +12,37 @@
     <script src="https://unpkg.com/vue@3"></script>
     <div id="app">{{ text }}</div>
     <script>
-        const vm = Vue.createApp({
+        const app = Vue.createApp({
             data() {
                 return {
                 
                 };
             },
-            template: ``
-        }).mount("#app");
+            template: `
+            <div>
+                <v-layout>
+                    <template v-slot:header>
+                        <button>Title</button>
+                    </template>
+                    <template v-slot:content>
+                        Lorem ispum dolor
+                    </template>
+                </v-layout>
+            </div>
+            `
+        });
+
+        app.component("v-layout", {
+            template: `
+            <header>
+                    <slot name="header"></slot>    
+            </header>
+            <div>
+                <slot name="content"></slot>
+            </div>
+            `
+        });
+        const vm =app.mount("#app");
     </script>
 </body>
 

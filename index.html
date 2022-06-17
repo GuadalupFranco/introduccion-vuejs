@@ -15,13 +15,29 @@
         const app = Vue.createApp({
             data() {
                 return {
-                
+                    items: ["1", "2", "3"]
                 };
             },
-            template: ``
+            template: `
+            <ul>
+                <v-item v-for="item in items" v-bind:text="item"></v-item>
+            </ul>
+            `
         });
         
+        app.component("v-item", {
+            props: {
+                text: {
+                    default: "Empty text"
+                }
+            },
+            template: `
+            <li>{{ text }}</li>
+            `
+        });
+
         const vm = app.mount("#app");
+
     </script>
 </body>
 

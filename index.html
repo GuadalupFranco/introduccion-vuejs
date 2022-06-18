@@ -15,12 +15,34 @@
         const app = Vue.createApp({
             data() {
                 return {
-                
+                    text: "Hello Vue"
                 };
             },
-            template: ``
+            provide() {  
+                return{
+                    otherText: this.text
+                };
+            },
+
+            template: `
+            <div>{{ text }}</div>
+            <second />
+            `
+        });
+
+        app.component("second", {
+            template: `
+            <third />
+            `
         });
         
+        app.component("third", {
+            inject: ["otherText"],
+            template: `
+            <div>{{ otherText }}</div>
+            `
+        });
+
         const vm = app.mount("#app");
     </script>
 </body>

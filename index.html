@@ -15,12 +15,37 @@
         const app = Vue.createApp({
             data() {
                 return {
-                
+                    text: "Hello Vue"
                 };
             },
-            template: ``
+            methods:{
+                input(e){
+                    console.log(e);
+                    this.text = e;
+                }
+            },
+            template: `
+            <div>
+                <p>{{ text }}</p>
+                <v-input v-model:value="text" />
+            </div>
+            `
         });
         
+        app.component("v-input", {
+            props: {
+                value: String
+            },
+            methods: {
+                input(e){
+                    this.$emit("update:value", e.srcElement.value);
+                }
+            },
+            template: `
+                <input type=text :value="value" @input="input"/>
+            `
+        });
+
         const vm = app.mount("#app");
     </script>
 </body>

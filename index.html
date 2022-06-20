@@ -15,13 +15,21 @@
         const app = Vue.createApp({
             data() {
                 return {
-                
+                    text: "Hello Vue"
                 };
             },
-            template: ``
+            template: `
+            <v-button ref="element" :label="text"></v-button>
+            `
         });
         
+        app.component("v-button", {
+            props: ["label"],
+            template: `<button>{{ label }}</button>`
+        })
+
         const vm = app.mount("#app");
+        console.log(vm.$el);
     </script>
 </body>
 
